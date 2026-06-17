@@ -1,0 +1,70 @@
+{
+  "usuarios": [
+    {
+      "id": "187cb7e5-e097-4224-8bc7-b610c855e2b1",
+      "login": "admin",
+      "senha": "123",
+      "nome": "Administrador do Sistema",
+      "email": "admin@abc.com",
+      "admin": true
+    },
+    {
+      "id": "ec37c83d-4b7f-458d-9e10-3fda7d37cd3e",
+      "login": "user",
+      "senha": "123",
+      "nome": "Usuario Comum",
+      "email": "user@abc.com",
+      "admin": false
+    }
+  ],
+  "manobras": [
+    {
+      "id": "1",
+      "nome": "Ollie",
+      "categoria": "Iniciante",
+      "descricao": "O salto básico do skate.",
+      "conteudo": "O Ollie é a manobra fundamental onde o skatista e o skate saltam para o ar sem o uso das mãos.",
+      "imagem": "https://images.unsplash.com/photo-1617034840325-b10d81550042?q=80&w=1470",
+      "destaque": true,
+      "base": "Regular ou Goofy",
+      "dica_mestre": "Bata o tail com força e chute o pé da frente arrastando até os parafusos.",
+      "fotos_vinculadas": [
+        { "titulo": "Posicionamento dos pés", "url": "https://images.unsplash.com/photo-1674902029629-6cb9abc61555?q=80&w=1474" },
+        { "titulo": "Momento do Pop e Impulso", "url": "https://images.unsplash.com/photo-1727031269674-4d00e41c0d24?q=80&w=1478" },
+        { "titulo": "Extensão no Ar e Altura Máxima", "url": "https://images.unsplash.com/photo-1763044938341-1b0cf685095c?q=80&w=1470" }
+      ]
+    },
+    {
+      "id": "2",
+      "nome": "Kickflip",
+      "categoria": "Intermediário",
+      "descricao": "O skate gira 360 graus no eixo longitudinal.",
+      "conteudo": "No Kickflip, o skatista chuta a borda do skate para que ele gire por baixo dos pés antes de aterrisar.",
+      "imagem": "https://images.unsplash.com/photo-1573054022697-3af201441528?w=600",
+      "destaque": true,
+      "base": "Requer Ollie consistente",
+      "dica_mestre": "O chute é para fora e levemente para baixo na quina do nose.",
+      "fotos_vinculadas": [
+        { "titulo": "O chute lateral", "url": "https://images.unsplash.com/photo-1688658177835-847bf77c9a4d?q=80&w=1470" },
+        { "titulo": "Rotação do Shape no Ar", "url": "https://images.unsplash.com/photo-1642323328160-bd8e483a8a47?q=80&w=1402" },
+        { "titulo": "Aterrissagem perfeita", "url": "https://images.unsplash.com/photo-1727031328769-1f7b587666f0?q=80&w=1475" }
+      ]
+    },
+    {
+      "id": "3",
+      "nome": "Heelflip",
+      "categoria": "Difícil",
+      "descricao": "Similar ao Kickflip, mas girado com o calcanhar.",
+      "conteudo": "Diferente do Kickflip, o Heelflip usa o calcanhar para girar o skate na direção oposta.",
+      "imagem": "https://images.unsplash.com/photo-1649281610716-94e4ee026d91?q=80&w=1470",
+      "destaque": false,
+      "base": "Requer bom controle de peso",
+      "dica_mestre": "Chute com o calcanhar para a frente do seu corpo.",
+      "fotos_vinculadas": [
+        { "titulo": "Chute com calcanhar", "url": "https://images.unsplash.com/photo-1567959518268-9fa172753b35?w=600" },
+        { "titulo": "Controle do Peso e Nivelamento", "url": "https://images.unsplash.com/photo-1688658177846-2814c866166e?w=600" },
+        { "titulo": "Finalização", "url": "https://images.unsplash.com/photo-1517871627464-75e4506348f3?q=80&w=1470" }
+      ]
+    }
+  ]
+}
