@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Skate Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body style="background-color: #1a1a1a">
+
+    <nav class="navbar navbar-expand-md navbar-dark px-2" style="background-color: #1a1a1a;">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-nowrap">
+
+        <a href="index.html" class="navbar-brand fs-3 fs-md-1 fw-bold p-2 p-md-4 d-flex align-items-center" style="text-decoration: none; color: white;">
+            <img src="img/logo-gato-grafismo.png" 
+                 alt="Logo Skate Hub" 
+                 width="100" 
+                 height="100">
+                <span>SKATE HUB</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" style="margin-right: 10px;">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+    </div>
+</nav>
+
+<form id="formLogin" class="container mt-5 text-light" style="max-width: 400px;">
+    <input type="text" id="loginUsuario" class="form-control" required>
+    <input type="password" id="senhaUsuario" class="form-control" required>
+    <button type="submit" class="btn-btn-danger w-100 mt-3">Entrar</button>
+    <button type="button" class="btn-btn-danger w-100 mt-3">Junte-se a nós</button>
+</form>
+
+<script src="assets/scripts/login.js"></script>
+</body>
+</html>
