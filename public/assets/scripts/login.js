@@ -75,3 +75,12 @@ btnIrParaCadastro.addEventListener('click', function(evento){
 
 });
 
+const btnIrParaLogin = document.getElementById('btnIrParaLogin');
+
+btnIrParaLogin.addEventListener('click', function(evento){
+    evento.preventDefault();
+
+    document.getElementById('formCadastro').classList.add('d-none');
+    document.getElementById('formLogin').classList.remove('d-none');
+
+});
