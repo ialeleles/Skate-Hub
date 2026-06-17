@@ -26,3 +26,42 @@ formulario.addEventListener('submit', async function(evento) {
     }
 });
 
+const cadastro = document.getElementById('formCadastro');
+
+cadastro.addEventListener('submit', async function(evento) {
+    evento.preventDefault();
+    
+    const nomeNovo = document.getElementById('cadNome').value;
+    const loginNovo = document.getElementById('cadLogin').value;
+    const senhaNova = document.getElementById('cadSenha').value;
+    const emailNovo = document.getElementById('cadEmail').value;
+
+    const novoUsuario = {
+        id: crypto.randomUUID(),
+        login: loginNovo,
+        senha: senhaNova,
+        nome: nomeNovo,
+        email: emailNovo,
+        admin: false
+    };
+
+    try {
+        const resposta = await fetch('/usuarios', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(novoUsuario)
+        });
+
+        if (resposta.ok) {
+            alert('Cadastro realizado com sucesso! Agora você já pode fazer o login.');
+            cadastro.reset();
+        } else {
+            alert('Erro ao realizar o cadastro.');
+        }
+    } catch (erro) {
+        console.error('Erro no cadastro:', erro)
+    }
+});
+
