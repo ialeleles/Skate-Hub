@@ -65,3 +65,13 @@ cadastro.addEventListener('submit', async function(evento) {
     }
 });
 
+const btnIrParaCadastro = document.getElementById('btnIrParaCadastro');
+
+btnIrParaCadastro.addEventListener('click', function(evento){
+    evento.preventDefault();
+
+    document.getElementById('formLogin').classList.add('d-none');
+    document.getElementById('formCadastro').classList.remove('d-none');
+
+});
+
