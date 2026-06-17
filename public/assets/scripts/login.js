@@ -1,5 +1,5 @@
 async function buscarUsuario(login, senha) {
-    const resposta = await fetch(`/usuarios?login=${login}&senha=${senha}`);
+    const resposta = await fetch(`/usuarios`);
     const usuarios = await resposta.json();
 
     return usuarios;
@@ -12,17 +12,21 @@ formulario.addEventListener('submit', async function(evento) {
 
     const loginDigitado = document.getElementById('loginUsuario').value;
     const senhaDigitada = document.getElementById('senhaUsuario').value;
-    const resultado = await buscarUsuario(loginDigitado, senhaDigitada);
+    const todosUsuarios = await buscarUsuario();
+    const resultado = todosUsuarios.filter(u => u.login === loginDigitado && u.senha === senhaDigitada);
 
     if (resultado.length > 0) {
         const usuario = resultado[0];
         
         localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
 
-        alert(`Bem-vindo, ${usuario.nome}!`)
-        window.location.href = 'index.html';
+        exibirNotificacao(`Bem-vindo, ${usuario.nome}!`, 'success');
+
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
     } else {
-        alert('Usuário ou senha incorretos.');
+        exibirNotificacao('Usuário ou senha incorretos.', 'danger');
     }
 });
 
@@ -55,13 +59,16 @@ cadastro.addEventListener('submit', async function(evento) {
         });
 
         if (resposta.ok) {
-            alert('Cadastro realizado com sucesso! Agora você já pode fazer o login.');
+            exibirNotificacao('Cadastro realizado com sucesso! Agora você já pode fazer o login.', 'success');
             cadastro.reset();
+
+            document.getElementById('formCadastro').classList.add('d-none');
+            document.getElementById('formLogin').classList.remove('d-none');
         } else {
-            alert('Erro ao realizar o cadastro.');
+            exibirNotificacao('Erro ao realizar o cadastro.', 'danger');
         }
     } catch (erro) {
-        console.error('Erro no cadastro:', erro)
+        console.error('Erro no cadastro:', erro);
     }
 });
 
@@ -69,18 +76,25 @@ const btnIrParaCadastro = document.getElementById('btnIrParaCadastro');
 
 btnIrParaCadastro.addEventListener('click', function(evento){
     evento.preventDefault();
-
     document.getElementById('formLogin').classList.add('d-none');
     document.getElementById('formCadastro').classList.remove('d-none');
-
 });
 
 const btnIrParaLogin = document.getElementById('btnIrParaLogin');
 
 btnIrParaLogin.addEventListener('click', function(evento){
     evento.preventDefault();
-
     document.getElementById('formCadastro').classList.add('d-none');
     document.getElementById('formLogin').classList.remove('d-none');
-
 });
+
+function exibirNotificacao(mensagem, tipo = 'success') {
+    const toastElemento = document.getElementById('toastMensagem');
+    const toastCorpo = document.getElementById('toastCorpo');
+
+    toastCorpo.textContent = mensagem;
+    toastElemento.className = `toast align-items-center text-white border-0 bg-${tipo}`;
+
+    const toast = new bootstrap.Toast(toastElemento, { delay: 3000 });
+    toast.show();
+}
