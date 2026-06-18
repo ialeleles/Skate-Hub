@@ -29,9 +29,18 @@
       "base": "Regular ou Goofy",
       "dica_mestre": "Bata o tail com força e chute o pé da frente arrastando até os parafusos.",
       "fotos_vinculadas": [
-        { "titulo": "Posicionamento dos pés", "url": "https://images.unsplash.com/photo-1674902029629-6cb9abc61555?q=80&w=1474" },
-        { "titulo": "Momento do Pop e Impulso", "url": "https://images.unsplash.com/photo-1727031269674-4d00e41c0d24?q=80&w=1478" },
-        { "titulo": "Extensão no Ar e Altura Máxima", "url": "https://images.unsplash.com/photo-1763044938341-1b0cf685095c?q=80&w=1470" }
+        {
+          "titulo": "Posicionamento dos pés",
+          "url": "https://images.unsplash.com/photo-1674902029629-6cb9abc61555?q=80&w=1474"
+        },
+        {
+          "titulo": "Momento do Pop e Impulso",
+          "url": "https://images.unsplash.com/photo-1727031269674-4d00e41c0d24?q=80&w=1478"
+        },
+        {
+          "titulo": "Extensão no Ar e Altura Máxima",
+          "url": "https://images.unsplash.com/photo-1763044938341-1b0cf685095c?q=80&w=1470"
+        }
       ]
     },
     {
@@ -45,9 +54,18 @@
       "base": "Requer Ollie consistente",
       "dica_mestre": "O chute é para fora e levemente para baixo na quina do nose.",
       "fotos_vinculadas": [
-        { "titulo": "O chute lateral", "url": "https://images.unsplash.com/photo-1688658177835-847bf77c9a4d?q=80&w=1470" },
-        { "titulo": "Rotação do Shape no Ar", "url": "https://images.unsplash.com/photo-1642323328160-bd8e483a8a47?q=80&w=1402" },
-        { "titulo": "Aterrissagem perfeita", "url": "https://images.unsplash.com/photo-1727031328769-1f7b587666f0?q=80&w=1475" }
+        {
+          "titulo": "O chute lateral",
+          "url": "https://images.unsplash.com/photo-1688658177835-847bf77c9a4d?q=80&w=1470"
+        },
+        {
+          "titulo": "Rotação do Shape no Ar",
+          "url": "https://images.unsplash.com/photo-1642323328160-bd8e483a8a47?q=80&w=1402"
+        },
+        {
+          "titulo": "Aterrissagem perfeita",
+          "url": "https://images.unsplash.com/photo-1727031328769-1f7b587666f0?q=80&w=1475"
+        }
       ]
     },
     {
@@ -61,10 +79,118 @@
       "base": "Requer bom controle de peso",
       "dica_mestre": "Chute com o calcanhar para a frente do seu corpo.",
       "fotos_vinculadas": [
-        { "titulo": "Chute com calcanhar", "url": "https://images.unsplash.com/photo-1567959518268-9fa172753b35?w=600" },
-        { "titulo": "Controle do Peso e Nivelamento", "url": "https://images.unsplash.com/photo-1688658177846-2814c866166e?w=600" },
-        { "titulo": "Finalização", "url": "https://images.unsplash.com/photo-1517871627464-75e4506348f3?q=80&w=1470" }
+        {
+          "titulo": "Chute com calcanhar",
+          "url": "https://images.unsplash.com/photo-1567959518268-9fa172753b35?w=600"
+        },
+        {
+          "titulo": "Controle do Peso e Nivelamento",
+          "url": "https://images.unsplash.com/photo-168865817746-2814c866166e?w=600"
+        },
+        {
+          "titulo": "Finalização",
+          "url": "https://images.unsplash.com/photo-1517871627464-75e4506348f3?q=80&w=1470"
+        }
       ]
     }
-  ]
+  ],
+  "equipamentos": [
+    {
+      "id": "1",
+      "nome": "Shape Colors Eyes",
+      "categoria": "shape",
+      "img": "assets/img/shape_colors_eyes_1_20260424171445_b0d86d14bb2d-removebg-preview.png"
+    },
+    {
+      "id": "2",
+      "nome": "Shape Colors Maple Logo",
+      "categoria": "shape",
+      "img": "assets/img/shape_colors_maple_logo.png"
+    },
+    {
+      "id": "3",
+      "nome": "Shape Santa Cruz Maple",
+      "categoria": "shape",
+      "img": "assets/img/shape-santacruz-maple.png"
+    },
+    {
+      "id": "4",
+      "nome": "Shape Supreme Gotham",
+      "categoria": "shape",
+      "img": "assets/img/shape_supreme_gotham.png"
+    },
+    {
+      "id": "5",
+      "nome": "Rolamentos Element Ceramic",
+      "categoria": "rolamentos",
+      "img": "assets/img/rolamento element ceramic.png"
+    },
+    {
+      "id": "6",
+      "nome": "Rolamento HHMS",
+      "categoria": "rolamentos",
+      "img": "assets/img/rolamento hhms.png"
+    },
+    {
+      "id": "7",
+      "nome": "Rolamento ABEC3",
+      "categoria": "rolamentos",
+      "img": "assets/img/rolamento abec3.png"
+    },
+    {
+      "id": "8",
+      "nome": "Rolamento Red Bones",
+      "categoria": "rolamentos",
+      "img": "assets/img/rolamento red bones.png"
+    },
+    {
+      "id": "9",
+      "nome": "Truck Thor",
+      "categoria": "truck",
+      "img": "assets/img/truck thor.png"
+    },
+    {
+      "id": "10",
+      "nome": "Truck Sense",
+      "categoria": "truck",
+      "img": "assets/img/truck sense.png"
+    },
+    {
+      "id": "11",
+      "nome": "Truck Fun Light",
+      "categoria": "truck",
+      "img": "assets/img/truck fun light.png"
+    },
+    {
+      "id": "12",
+      "nome": "Truck Narina",
+      "categoria": "truck",
+      "img": "assets/img/truck narina.png"
+    },
+    {
+      "id": "13",
+      "nome": "Roda Flh Ss",
+      "categoria": "rodas",
+      "img": "assets/img/roda flh ss.png"
+    },
+    {
+      "id": "14",
+      "nome": "Roda Next Max",
+      "categoria": "rodas",
+      "img": "assets/img/roda next max.png"
+    },
+    {
+      "id": "15",
+      "nome": "Roda Black Sheep",
+      "categoria": "rodas",
+      "img": "assets/img/roda black sheep.png"
+    },
+    {
+      "id": "16",
+      "nome": "Roda Moska Rock",
+      "categoria": "rodas",
+      "img": "assets/img/roda moska rock.png"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
