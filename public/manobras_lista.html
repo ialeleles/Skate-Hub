@@ -49,24 +49,6 @@
             color: #ff4d6d;
             background: rgba(0, 0, 0, .75);
         }
-
-        .btn-favorito-detalhe {
-            border: none;
-            background: transparent;
-            color: #fff;
-            font-size: 2rem;
-            line-height: 1;
-            cursor: pointer;
-            transition: color .15s ease, transform .15s ease;
-        }
-
-        .btn-favorito-detalhe:hover {
-            transform: scale(1.1);
-        }
-
-        .btn-favorito-detalhe.favoritado {
-            color: #ff4d6d;
-        }
     </style>
 </head>
 <body>
@@ -108,7 +90,7 @@
 
             <div class="col-12 col-md-3 mb-4">
                 <div class="card p-4 text-light" style="background-color: #2a2a2a;">
-                    <h4 class="text-center mb-4">Filtrar</h4>
+                    <h4 class="text-center mb-4 text-warning fw-bold">Filtrar</h4>
 
                     <div class="mb-3">
                         <label class="form-label">Categoria:</label>
@@ -129,7 +111,7 @@
             </div>
 
             <div class="col-12 col-md-9">
-                <div class="row g-4 justify-content-center" id="grid-manobras"></div>
+                <div class="row g-4 justify-content-start" id="grid-manobras"></div>
             </div>
 
         </div>
@@ -202,7 +184,7 @@
                 </div>
                 <div class="modal-footer border-secondary">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-light fw-bold" id="btnSalvarManobra">Salvar</button>
+                    <button type="button" class="btn btn-warning fw-bold text-dark" id="btnSalvarManobra">Salvar</button>
                 </div>
             </div>
         </div>
@@ -211,146 +193,24 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        const DADOS_PADRAO = [
-            {
-                "id": 1,
-                "nome": "Ollie",
-                "categoria": "Iniciante",
-                "descricaoCurta": "O salto básico e fundamental do skate.",
-                "descricaoCompleta": "O Ollie é a manobra base de todo o skate moderno. Consiste em bater o tail no chão (pop) e arrastar o pé da frente.",
-                "imagem": "https://images.unsplash.com/photo-1617034840325-b10d81550042?q=80&w=1470",
-                "dificuldade_num": 1,
-                "tags": ["solo", "fundamental"],
-                "destaque": true,
-                "base": "Regular ou Goofy",
-                "dica_mestre": "Bata o tail com força."
-            },
-            {
-                "id": 2,
-                "nome": "Kickflip",
-                "categoria": "Intermediário",
-                "descricaoCurta": "O skate gira 360 graus no eixo longitudinal.",
-                "descricaoCompleta": "No Kickflip, o skatista executa a base do Ollie, mas chuta a borda externa do nose com o pé da frente.",
-                "imagem": "https://images.unsplash.com/photo-1573054022697-3af201441528?w=600",
-                "dificuldade_num": 3,
-                "tags": ["flip", "rua"],
-                "destaque": true,
-                "base": "Requer Ollie consistente",
-                "dica_mestre": "O chute é para fora e levemente para baixo."
-            },
-            {
-                "id": 3,
-                "nome": "Heelflip",
-                "categoria": "Intermediário",
-                "descricaoCurta": "Similar ao Kickflip, mas girado com o calcanhar.",
-                "descricaoCompleta": "Diferente do Kickflip, o Heelflip utiliza o calcanhar do pé da frente para chutar a borda oposta do skate, fazendo-o girar na direção contrária à do Kickflip.",
-                "imagem": "https://images.unsplash.com/photo-1649281610716-94e4ee026d91?q=80&w=1470",
-                "dificuldade_num": 3,
-                "tags": ["flip", "calcanhar", "rua"],
-                "destaque": false,
-                "base": "Requer bom controle de peso",
-                "dica_mestre": "Chute com o calcanhar para a frente do seu corpo."
-            },
-            {    
-                "id": 4,
-                "nome": "Pop Shuvit",
-                "categoria": "Iniciante",
-                "descricaoCurta": "O skate gira 180 graus horizontalmente por baixo dos pés.",
-                "descricaoCompleta": "Uma combinação de um leve pop com um impulso do pé de trás para trás, fazendo o shape girar em meia-lua sem que ele incline ou rotacione verticalmente.",
-                "imagem": "https://images.unsplash.com/photo-1772014687134-3f467e50535d?w=600",
-                "dificuldade_num": 2,
-                "tags": ["giro", "shuvit", "basico"],
-                "destaque": false,
-                "base": "Requer controle do pé de trás",
-                "dica_mestre": "Não tente pular muito alto no começo, foque em raspar o pé de trás para trás."
-            },
-            {
-                "id": 5,
-                "nome": "Frontside 180",
-                "categoria": "Iniciante",
-                "descricaoCurta": "Um Ollie girando corpo e skate 180 graus de frente.",
-                "descricaoCompleta": "O skatista executa um Ollie enquanto gira seus ombros e o quadril para a frente (direção do peito), fazendo com que ele mude a base de pouso completamente.",
-                "imagem": "https://images.unsplash.com/photo-1763044938341-1b0cf685095c?w=600",
-                "dificuldade_num": 2,
-                "tags": ["180", "giro-corpo", "frontside"],
-                "destaque": false,
-                "base": "Requer Ollie estável",
-                "dica_mestre": "Gire os ombros logo antes de bater o pop; o skate seguirá o seu corpo."
-            },
-            {
-                "id": 6,
-                "nome": "Backside 180",
-                "categoria": "Intermediário",
-                "descricaoCurta": "Um Ollie girando corpo e skate 180 graus de costas.",
-                "descricaoCompleta": "Semelhante ao Frontside 180, mas a rotação ocorre de costas para a direção do movimento. É um pouco mais complexo devido à perda temporária de visão do chão.",
-                "imagem": "https://images.unsplash.com/photo-1572029437331-09ca45a52dca?w=600",
-                "dificuldade_num": 3,
-                "tags": ["180", "giro-corpo", "backside"],
-                "destaque": false,
-                "base": "Requer boa noção espacial",
-                "dica_mestre": "Gire a cabeça acompanhando o movimento para achar o chão no pouso."
-            },
-            {
-                "id": 7,
-                "nome": "360 Flip",
-                "categoria": "Avançado",
-                "descricaoCurta": "O famoso Tre Flip: rotação de 360 do Shuvit com um Kickflip.",
-                "descricaoCompleta": "A manobra mais cobiçada das ruas. O pé de trás faz um movimento forte de concha (scoop) para rodar um 360 Shuvit, enquanto o pé da frente chuta levemente um Kickflip.",
-                "imagem": "https://images.unsplash.com/photo-1638250290918-0ecd4f985708?w=600",
-                "dificuldade_num": 5,
-                "tags": ["avancado", "treflip", "rua"],
-                "destaque": true,
-                "base": "Requer Kickflip e Varial Flip",
-                "dica_mestre": "90% do segredo está na pressão e no scoop do seu pé de trás no tail."
-            },
-            {
-                "id": 8,
-                "nome": "Boardslide",
-                "categoria": "Transição e Corrimão",
-                "descricaoCurta": "Deslizar com o meio do shape no obstáculo.",
-                "descricaoCompleta": "A primeira manobra de cano ou borda de muita gente. O skatista manda um Ollie, gira 90 graus e encaixa o meio da tábua (shape) no obstáculo, deslizando de lado.",
-                "imagem": "https://images.unsplash.com/photo-1642323328160-bd8e483a8a47?w=600",
-                "dificuldade_num": 2,
-                "tags": ["slide", "corrimao", "borda"],
-                "destaque": false,
-                "base": "Requer Ollie alto o suficiente",
-                "dica_mestre": "Mantenha o peso centralizado exatamente no meio das pernas para não escorregar."
-            },
-            {
-                "id": 9,
-                "nome": "50-50 Grind",
-                "categoria": "Transição e Corrimão",
-                "descricaoCurta": "Deslizar utilizando ambos os eixos (trucks) na borda.",
-                "descricaoCompleta": "Manobra básica de grind onde o skatista sobe no obstáculo paralelas e encaixa tanto o truck da frente quanto o de trás diretamente no ferro ou quina de alvenaria.",
-                "imagem": "https://images.unsplash.com/photo-1613234073279-4c9c1b049d90?w=600",
-                "dificuldade_num": 3,
-                "tags": ["grind", "eixos", "borda"],
-                "destaque": false,
-                "base": "Controle de precisão no Ollie",
-                "dica_mestre": "Suba mirando o truck de trás primeiro, o da frente se alinea logo em seguida."
-            },
-            {
-                "id": 10,
-                "nome": "Hardflip",
-                "categoria": "Avançado",
-                "descricaoCurta": "Um Frontside Shuvit combinado com um Kickflip passando por entre as pernas.",
-                "descricaoCompleta": "Uma das manobras técnicas mais difíceis. O skate executa uma rotação vertical que passa de forma quase em pé por entre as pernas abertas do skatista.",
-                "imagem": "https://images.unsplash.com/photo-1454094309557-181967334e22?w=600",
-                "dificuldade_num": 5,
-                "tags": ["avancado", "hard", "tecnica"],
-                "destaque": true,
-                "base": "Requer Frontside Shuvit perfeito",
-                "dica_mestre": "Abra bem as pernas e pule alto para dar espaço para o skate girar verticalmente."
-             }
-        ];
-
-        let manobras = JSON.parse(localStorage.getItem('banco_manobras')) || DADOS_PADRAO;
-        let favoritos = JSON.parse(localStorage.getItem('favoritos_manobras')) || [];
+        const API_URL = "http://localhost:3000/manobras";
+        let todasAsManobras = [];
         let idManobraEditando = null;
         let bsModal = null;
 
-        if (!localStorage.getItem('banco_manobras')) {
-            localStorage.setItem('banco_manobras', JSON.stringify(DADOS_PADRAO));
+        async function buscarManobras() {
+            try {
+                const resposta = await fetch(API_URL);
+                if (!resposta.ok) throw new Error("Erro na requisição");
+                todasAsManobras = await resposta.json();
+                aplicarFiltros();
+            } catch (error) {
+                console.error("Erro ao carregar dados do JSON Server:", error);
+                document.getElementById('grid-manobras').innerHTML = `
+                    <div class="alert alert-danger w-100 text-center" role="alert">
+                        Não foi possível carregar os dados. Certifique-se de que o JSON Server está ativo na porta 3001!
+                    </div>`;
+            }
         }
 
         function renderizarGrid(lista) {
@@ -363,13 +223,13 @@
             }
 
             grid.innerHTML = lista.map(item => {
-                const ehFavorito = favoritos.includes(item.id);
+                const ehFavorito = item.favorito === true || item.favorito === "true";
                 return `
                     <div class="col-12 col-sm-6 col-lg-4">
                         <div class="card h-100 bg-dark text-light border-secondary manobra-card position-relative" style="overflow: hidden;">
                             
                             <button class="btn-favorito ${ehFavorito ? 'favoritado' : ''}" 
-                                    onclick="window.alternarFavorito(event, ${item.id})" 
+                                    onclick="window.alternarFavorito(event, ${item.id}, ${ehFavorito})" 
                                     title="Favoritar">
                                 &hearts;
                             </button>
@@ -378,15 +238,15 @@
                             
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div>
-                                    <h5 class="fw-bold mb-1">${item.nome}</h5>
+                                    <h5 class="fw-bold mb-1 text-warning">${item.nome}</h5>
                                     <span class="badge bg-secondary mb-3">${item.categoria}</span>
-                                    <p class="card-text small text-secondary">${item.descricaoCurta}</p>
+                                    <p class="card-text small text-secondary" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${item.descricaoCurta}</p>
                                 </div>
                                 
                                 <div class="mt-3">
                                     <div class="d-flex gap-2 mb-2">
-                                        <button class="btn btn-sm btn-outline-warning w-50" onclick="window.abrirEditar(${item.id})">Editar</button>
-                                        <button class="btn btn-sm btn-outline-danger w-50" onclick="window.deletarManobra(${item.id})">Excluir</button>
+                                        <button class="btn btn-sm btn-outline-warning w-50 fw-bold" onclick="window.abrirEditar(${item.id})">Editar</button>
+                                        <button class="btn btn-sm btn-outline-danger w-50 fw-bold" onclick="window.deletarManobra(${item.id})">Excluir</button>
                                     </div>
                                     <a href="detalhes.html?id=${item.id}" class="btn btn-light btn-sm w-100 fw-bold">Ver detalhes</a>
                                 </div>
@@ -401,7 +261,7 @@
             const termoBusca = document.getElementById('busca-manobra').value.toLowerCase();
             const categoriaSel = document.getElementById('filtro-categoria').value;
 
-            const filtradas = manobras.filter(m => {
+            const filtradas = todasAsManobras.filter(m => {
                 const bateNome = m.nome.toLowerCase().includes(termoBusca);
                 const bateCategoria = (categoriaSel === 'Todos' || m.categoria === categoriaSel);
                 return bateNome && bateCategoria;
@@ -412,7 +272,6 @@
 
         function abrirCriar() {
             idManobraEditando = null;
-            document.getElementById('formFormManobra')?.reset();
             document.getElementById('formManobra').reset();
             document.getElementById('modalManobraTitulo').innerText = 'Adicionar Nova Manobra';
             bsModal.show();
@@ -420,7 +279,7 @@
 
         function abrirEditar(id) {
             idManobraEditando = id;
-            const manobra = manobras.find(m => m.id === id);
+            const manobra = todasAsManobras.find(m => m.id == id);
             if (!manobra) return;
 
             document.getElementById('modalManobraTitulo').innerText = 'Editar Manobra';
@@ -438,15 +297,20 @@
             bsModal.show();
         }
 
-        function salvarManobra() {
+        async function salvarManobra() {
             const form = document.getElementById('formManobra');
             if (!form.checkValidity()) {
                 form.reportValidity();
                 return;
             }
 
-            const novaManobra = {
-                id: idManobraEditando ? idManobraEditando : Date.now(),
+            let statusFavoritoOriginal = false;
+            if (idManobraEditando) {
+                const correspondente = todasAsManobras.find(m => m.id == idManobraEditando);
+                if (correspondente) statusFavoritoOriginal = correspondente.favorito || false;
+            }
+
+            const dadosCorpo = {
                 nome: document.getElementById('campoNome').value,
                 categoria: document.getElementById('campoCategoria').value,
                 descricaoCurta: document.getElementById('campoDescricaoCurta').value,
@@ -456,41 +320,58 @@
                 destaque: document.getElementById('campoDestaque').value === 'true',
                 base: document.getElementById('campoBase').value,
                 tags: document.getElementById('campoTags').value.split(',').map(t => t.trim()).filter(t => t),
-                dica_mestre: document.getElementById('campoDica').value
+                dica_mestre: document.getElementById('campoDica').value,
+                favorito: statusFavoritoOriginal
             };
 
-            if (idManobraEditando) {
-                manobras = manobras.map(m => m.id === idManobraEditando ? novaManobra : m);
-            } else {
-                manobras.push(novaManobra);
-            }
+            const urlFinal = idManobraEditando ? `${API_URL}/${idManobraEditando}` : API_URL;
+            const metodoHTTP = idManobraEditando ? 'PUT' : 'POST';
 
-            localStorage.setItem('banco_manobras', JSON.stringify(manobras));
-            aplicarFiltros();
-            bsModal.hide();
-        }
+            try {
+                const resposta = await fetch(urlFinal, {
+                    method: metodoHTTP,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dadosCorpo)
+                });
 
-        function deletarManobra(id) {
-            if (confirm("Deseja realmente excluir esta manobra?")) {
-                manobras = manobras.filter(m => m.id !== id);
-                favoritos = favoritos.filter(favId => favId !== id);
+                if (!resposta.ok) throw new Error("Erro ao salvar");
                 
-                localStorage.setItem('banco_manobras', JSON.stringify(manobras));
-                localStorage.setItem('favoritos_manobras', JSON.stringify(favoritos));
-                aplicarFiltros();
+                bsModal.hide();
+                await buscarManobras();
+            } catch (error) {
+                alert("Erro ao salvar manobra no servidor.");
+                console.error(error);
             }
         }
 
-        function alternarFavorito(e, id) {
+        async function deletarManobra(id) {
+            if (confirm("Deseja realmente excluir esta manobra do banco de dados?")) {
+                try {
+                    const resposta = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+                    if (!resposta.ok) throw new Error("Erro ao deletar");
+                    await buscarManobras();
+                } catch (error) {
+                    alert("Não foi possível excluir a manobra.");
+                    console.error(error);
+                }
+            }
+        }
+
+        async function alternarFavorito(e, id, estadoAtual) {
             if (e) e.stopPropagation();
             
-            if (favoritos.includes(id)) {
-                favoritos = favoritos.filter(favId => favId !== id);
-            } else {
-                favoritos.push(id);
+            try {
+                const resposta = await fetch(`${API_URL}/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ favorito: !estadoAtual })
+                });
+
+                if (!resposta.ok) throw new Error("Erro ao atualizar favorito");
+                await buscarManobras();
+            } catch (error) {
+                console.error("Erro ao favoritar:", error);
             }
-            localStorage.setItem('favoritos_manobras', JSON.stringify(favoritos));
-            aplicarFiltros();
         }
 
         window.alternarFavorito = alternarFavorito;
@@ -508,7 +389,7 @@
             document.getElementById('btnNovaManobra')?.addEventListener('click', abrirCriar);
             document.getElementById('btnSalvarManobra')?.addEventListener('click', salvarManobra);
 
-            renderizarGrid(manobras);
+            buscarManobras();
         });
     </script>
 </body>

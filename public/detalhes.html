@@ -73,14 +73,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. Recupera os dados do localStorage
             const manobras = JSON.parse(localStorage.getItem('banco_manobras')) || [];
             let favoritos = JSON.parse(localStorage.getItem('favoritos_manobras')) || [];
 
             const params = new URLSearchParams(window.location.search);
             const idManobra = parseInt(params.get('id'));
-
-            // 3. Encontra a manobra específica
             const manobra = manobras.find(m => m.id === idManobra);
             const container = document.getElementById('detalhe-manobra');
 

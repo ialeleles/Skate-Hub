@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skate Hub - Estatísticas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+        }
+        .card-grafico {
+            background-color: #2a2a2a;
+            border: 1px solid #3d3d3d;
+            border-radius: 10px;
+            padding: 20px;
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        canvas {
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark px-3 py-3" style="background-color: #1a1a1a;">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand fs-4 fw-bold d-flex align-items-center gap-2" style="text-decoration: none; color: white;">
+                <img src="assets/img/logo-gato-grafismo.png"
+                     alt="Logo Skate Hub"
+                     width="100"
+                     height="100"
+                     class="d-inline-block align-text-top">
+                <span>SKATE HUB</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <div class="d-flex flex-column flex-md-row gap-2 ms-auto mt-3 mt-md-0">
+                    <a href="index.html" class="btn btn-light btn-sm fw-bold">HOME</a>
+                    <a href="pegboard.html" class="btn btn-light btn-sm fw-bold">PAGEBOARD</a>
+                    <a href="login.html" class="btn btn-light btn-sm fw-bold">LOGIN</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <h1 class="text-center fw-bold mb-4 text-uppercase text-warning">Gráficos e Estatísticas do Catálogo</h1>
+        <p class="text-center text-secondary mb-5">Análise em tempo real das manobras cadastradas no nosso banco de dados.</p>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card-grafico text-center">
+                    <h5 class="fw-bold mb-3 text-warning">Quantidade de Manobras por Categoria</h5>
+                    <canvas id="graficoCategorias"></canvas>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card-grafico text-center">
+                    <h5 class="fw-bold mb-3 text-warning">Distribuição por Nível de Dificuldade</h5>
+                    <canvas id="graficoDificuldade"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="index.html" class="btn btn-outline-light fw-bold">← Voltar para as Manobras</a>
+        </div>
+    </main>
+
+    <footer class="text-light text-center p-4 mt-5" style="background-color: #333;">
+        <p class="mb-0 fs-5">© 2026 Skate Hub - Criado por Iale Leles</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        const API_URL = "http://localhost:3000/manobras";
+
+        async function carregarEstatisticas() {
+            try {
+                const resposta = await fetch(API_URL);
+                if (!resposta.ok) throw new Error("Erro ao buscar dados do servidor");
+                
+                const manobras = await resposta.json();
+                gerarGraficos(manobras);
+            } catch (error) {
+                console.error("Erro ao carregar dados do JSON Server:", error);
+                alert("Não foi possível carregar as estatísticas. Verifique se o JSON Server está rodando na porta 3001.");
+            }
+        }
+
+        function gerarGraficos(manobras) {
+            const contagemCategorias = {
+                "Iniciante": 0,
+                "Intermediário": 0,
+                "Avançado": 0,
+                "Transição e Corrimão": 0
+            };
+
+            manobras.forEach(m => {
+                if (contagemCategorias[m.categoria] !== undefined) {
+                    contagemCategorias[m.categoria]++;
+                }
+            });
+
+            const contagemDificuldade = { "★": 0, "★★": 0, "★★★": 0, "★★★★": 0, "★★★★★": 0 };
+            
+            manobras.forEach(m => {
+                const numEstrelas = m.dificuldade_num || 1;
+                const estrelas = "★".repeat(numEstrelas);
+                if (contagemDificuldade[estrelas] !== undefined) {
+                    contagemDificuldade[estrelas]++;
+                }
+            });
+
+            const ctxCat = document.getElementById('graficoCategorias').getContext('2d');
+            new Chart(ctxCat, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(contagemCategorias),
+                    datasets: [{
+                        label: 'Manobras',
+                        data: Object.values(contagemCategorias),
+                        backgroundColor: ['#ffc107', '#fd7e14', '#dc3545', '#0d6efd'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { 
+                        y: { beginAtZero: true, ticks: { color: '#fff', stepSize: 1 } }, 
+                        x: { ticks: { color: '#fff' } } 
+                    }
+                }
+            });
+
+            const ctxDif = document.getElementById('graficoDificuldade').getContext('2d');
+            new Chart(ctxDif, {
+                type: 'doughnut',
+                data: {
+                    labels: Object.keys(contagemDificuldade),
+                    datasets: [{
+                        data: Object.values(contagemDificuldade),
+                        backgroundColor: ['#198754', '#0dcaf0', '#ffc107', '#fd7e14', '#dc3545'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { labels: { color: '#fff' } } }
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            carregarEstatisticas();
+        });
+    </script>
+</body>
+</html>

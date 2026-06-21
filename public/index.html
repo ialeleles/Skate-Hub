@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body>
+<body style="background-color: #1a1a1a;">
     
     <nav class="navbar navbar-expand-md navbar-dark px-3 py-3" style="background-color: #1a1a1a;">
         <div class="container-fluid">
@@ -27,10 +27,11 @@
             </button>
             
             <div class="collapse navbar-collapse" id="menu">
-                <div class="d-flex flex-column flex-md-row gap-2 ms-auto mt-3 mt-md-0">
-                    <a href="manobras.html" class="btn btn-light btn-sm fw-bold">MANOBRAS</a>
+                <div class="d-flex flex-column flex-md-row gap-2 ms-auto mt-3 mt-md-0 align-items-md-center" id="nav-auth-container">
+                    <a href="manobras_lista.html" class="btn btn-light btn-sm fw-bold active">MANOBRAS</a>
                     <a href="pegboard.html" class="btn btn-light btn-sm fw-bold">PAGEBOARD</a>
-                    <a href="login.html" class="btn btn-light btn-sm fw-bold">LOGIN</a>
+                    <a href="dashboard.html" class="btn btn-light btn-sm fw-bold">DASHBOARD</a>
+                    <a href="login.html" id="btn-login-nav" class="btn btn-light btn-sm fw-bold">LOGIN</a>
                 </div>
             </div>
 
@@ -38,48 +39,39 @@
     </nav>
 
 <main>
-    <section class="background">
-        <img src="https://images.unsplash.com/photo-1602878714398-b28d40926846?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0" alt="imagem de fundo de uma pessoa andando de skate" class="background-img">
+    <section class="background position-relative text-center text-white mb-5" style="overflow: hidden; max-height: 450px;">
+        <img src="https://images.unsplash.com/photo-1602878714398-b28d40926846?q=80&w=1471&auto=format&fit=crop" alt="imagem de fundo de uma pessoa andando de skate" class="background-img w-100" style="object-fit: cover; height: 450px; opacity: 0.4;">
     
-        <div class="título-background">
-            <h2>Domine o skate</h2>
-        </div>
-    
-        <div class="conteúdo-background">
-            <h3>Aprenda manobras e evolua mais rápido!</h3>
+        <div class="position-absolute top-50 start-50 translate-middle w-100 px-3">
+            <h2 class="fw-bold display-4 text-uppercase text-warning">Domine o skate</h2>
+            <p class="fs-4 text-light">Aprenda manobras e evolua mais rápido!</p>
         </div>
     </section>
     
-    <div class="container">
-        <h3 class="titulo-secao">Manobras em Destaque</h3>
+    <div class="container mb-5">
+        <h3 class="fw-bold text-light text-uppercase mb-4">Manobras em Destaque</h3>
         
-        <div id="carouselDestaques" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div id="carouselDestaques" class="carousel slide border border-secondary rounded shadow-lg overflow-hidden" data-bs-ride="carousel" data-bs-interval="5000">
             <div class="carousel-indicators" id="carrossel-indicadores"></div>
-    
             <div class="carousel-inner" id="carrossel-itens"></div>
-    
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselDestaques" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselDestaques" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
-            
         </div>
     </div>
     
-    <div class="texto-conteudo">Comece por aqui</div>
-    
-    <div class="container mt-5">
+    <div class="container text-light mt-5">
         <div class="row">
     
             <div class="col-12 col-md-3 mb-4">
-                <div class="card p-4 text-light" style="background-color: #2a2a2a;">
-                    <h4 class="text-center mb-4">Filtrar</h4>
-    
+                <div class="card p-4 text-light border-secondary" style="background-color: #2a2a2a;">
+                    <h4 class="fw-bold mb-4 text-warning">Filtrar</h4>
                     <div class="mb-3">
-                        <label class="form-label">Categoria:</label>
-                        <select class="form-select" id="filtro-categoria">
+                        <label class="form-label fw-bold">Categoria:</label>
+                        <select class="form-select bg-dark text-light border-secondary" id="filtro-categoria">
                             <option value="Todos">Todos</option>
                             <option value="Iniciante">Iniciante</option>
                             <option value="Intermediário">Intermediário</option>
@@ -91,57 +83,79 @@
             </div>
     
             <div class="col-12 col-md-9">
-                <div class="row g-4 justify-content-center" id="container-manobras"></div>
-    
-                <div id="detalhe-manobra"></div>
+                <h4 class="fw-bold text-light text-uppercase mb-4">Todas as Manobras</h4>
+                <div class="row g-4 justify-content-start" id="container-manobras"></div>
             </div>
     
         </div>
     </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/scripts/app.js"></script>
+<footer class="text-light text-center p-4 mt-5" style="background-color: #333;">
+    <p class="mb-0 fs-5">© 2026 Skate Hub - Criado por Iale Leles</p>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // 1. BANCO DE DADOS EMUTIDO
-    const manobras = [
-        {
-            "id": 1,
-            "nome": "Ollie",
-            "categoria": "Iniciante",
-            "descricaoCurta": "O salto básico e fundamental do skate.",
-            "imagem": "https://images.unsplash.com/photo-1617034840325-b10d81550042?q=80&w=1470",
-            "destaque": true
-        },
-        {
-            "id": 2,
-            "nome": "Kickflip",
-            "categoria": "Intermediário",
-            "descricaoCurta": "O skate gira 360 graus no ar.",
-            "imagem": "https://images.unsplash.com/photo-1573054022697-3af201441528?w=600",
-            "destaque": true
-        },
-        {
-            "id": 3,
-            "nome": "Heelflip",
-            "categoria": "Intermediário",
-            "descricaoCurta": "Similar ao Kickflip, mas girado com o calcanhar.",
-            "imagem": "https://images.unsplash.com/photo-1649281610716-94e4ee026d91?q=80&w=1470",
-            "destaque": false
-        }
-    ];
+    const API_URL = "http://localhost:3000/manobras";
+    let todasAsManobras = [];
 
-    // 2. FUNÇÃO PARA CARREGAR O CARROSSEL
-    function carregarCarrossel() {
+    function gerenciarNavegacaoAutenticada() {
+        const usuarioLogado = localStorage.getItem("usuario_logado");
+        const nomeSessao = localStorage.getItem("nome_sessao");
+        const btnLoginNav = document.getElementById("btn-login-nav");
+
+        if (usuarioLogado === "true" && nomeSessao) {
+            if (btnLoginNav) btnLoginNav.remove();
+
+            const navContainer = document.getElementById("nav-auth-container");
+            navContainer.insertAdjacentHTML("beforeend", `
+                <div class="d-flex align-items-center gap-2 ms-md-2 mt-2 mt-md-0" id="user-logged-menu">
+                    <span class="text-warning fw-bold text-uppercase small">🛹 ${nomeSessao}</span>
+                    <button id="btn-logout" class="btn btn-danger btn-sm fw-bold">SAIR</button>
+                </div>
+            `);
+
+            document.getElementById("btn-logout")?.addEventListener("click", () => {
+                localStorage.clear();
+                window.location.reload();
+            });
+        }
+    }
+
+    async function buscarManobras() {
+        try {
+            const resposta = await fetch(API_URL);
+            todasAsManobras = await resposta.json(); 
+            
+            carregarCarrossel(todasAsManobras);
+            renderizarCards(todasAsManobras);
+        } catch (error) {
+            console.error("Erro ao carregar dados do JSON Server:", error);
+            document.getElementById('container-manobras').innerHTML = `
+                <div class="alert alert-danger w-100" role="alert">
+                    Não foi possível conectar ao banco de dados. Certifique-se de que o JSON Server está ativo na porta 3500!
+                </div>`;
+        }
+    }
+
+    function carregarCarrossel(lista) {
         const containerCarrossel = document.getElementById('carrossel-itens');
         const containerIndicadores = document.getElementById('carrossel-indicadores');
 
         if (!containerCarrossel || !containerIndicadores) return;
 
-        const itensDestaque = manobras.filter(m => m.destaque);
+        const itensDestaque = lista.filter(m => m.destaque);
+        
+        if (itensDestaque.length === 0) {
+            containerCarrossel.innerHTML = `
+                <div class="carousel-item active p-5 text-center bg-dark text-muted">
+                    <h5>Nenhuma manobra marcada como destaque no banco.</h5>
+                </div>`;
+            return;
+        }
+
         let htmlCarrossel = '';
         let htmlIndicadores = '';
 
@@ -152,10 +166,10 @@
                 <div class="carousel-item ${activeClass}">
                     <img src="${item.imagem}" class="d-block w-100" alt="${item.nome}" style="height: 400px; object-fit: cover;">
                     <div class="carousel-caption">
-                        <div class="bg-dark bg-opacity-75 p-3 rounded">
-                            <h2 class="fw-bold text-white text-uppercase mb-1">${item.nome}</h2>
+                        <div class="bg-dark bg-opacity-75 p-3 rounded shadow">
+                            <h2 class="fw-bold text-warning text-uppercase mb-1">${item.nome}</h2>
                             <p class="text-light mb-3">${item.descricaoCurta}</p>
-                            <a href="detalhes.html?id=${item.id}" class="btn btn-light btn-sm fw-bold px-3">Ver detalhes</a>
+                            <a href="detalhes.html?id=${item.id}" class="btn btn-warning btn-sm fw-bold px-3 text-dark">Ver detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -170,52 +184,45 @@
         containerIndicadores.innerHTML = htmlIndicadores;
     }
 
-    // 3. FUNÇÃO PARA RENDERIZAR OS CARDS
     function renderizarCards(lista) {
         const container = document.getElementById('container-manobras');
         if (!container) return;
 
+        if (lista.length === 0) {
+            container.innerHTML = `<p class="text-secondary ps-2">Nenhuma manobra encontrada nesta categoria.</p>`;
+            return;
+        }
+
         container.innerHTML = lista.map(item => `
-            <div class="col-12 col-sm-6 col-lg-4 d-flex justify-content-center">
-                <div class="card h-100 w-100 bg-dark text-light border-secondary">
-                    <img src="${item.imagem}" alt="${item.nome}" class="card-img-top" style="height: 200px; object-fit: cover;">
+            <div class="col-12 col-sm-6 col-lg-4 d-flex">
+                <div class="card h-100 w-100 bg-dark text-light border-secondary shadow-sm">
+                    <img src="${item.imagem}" alt="${item.nome}" class="card-img-top" style="height: 180px; object-fit: cover;">
                     <div class="card-body d-flex flex-column justify-content-between">
                         <div>
-                            <h5 class="fw-bold mb-2">${item.nome}</h5>
+                            <h5 class="fw-bold mb-1 text-warning">${item.nome}</h5>
                             <span class="badge bg-secondary mb-3">${item.categoria}</span>
-                            <p class="card-text small text-secondary">${item.descricaoCurta}</p>
+                            <p class="card-text small text-secondary" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${item.descricaoCurta}</p>
                         </div>
-                        <a href="detalhes.html?id=${item.id}" class="btn btn-outline-light btn-sm w-100 mt-2">Ver detalhes</a>
+                        <a href="detalhes.html?id=${item.id}" class="btn btn-outline-light btn-sm w-100 mt-3 fw-bold">Ver detalhes</a>
                     </div>
                 </div>
             </div>
         `).join('');
     }
 
-    // 4. FILTRO DE CATEGORIAS
     document.getElementById('filtro-categoria')?.addEventListener('change', (e) => {
         const categoriaSelecionada = e.target.value;
         if (categoriaSelecionada === 'Todos') {
-            renderizarCards(manobras);
+            renderizarCards(todasAsManobras);
         } else {
-            const filtradas = manobras.filter(m => m.categoria === categoriaSelecionada);
+            const filtradas = todasAsManobras.filter(m => m.categoria === categoriaSelecionada);
             renderizarCards(filtradas);
         }
     });
 
-    // EXECUÇÃO IMEDIATA ASSIM QUE A PÁGINA ABRE
     document.addEventListener("DOMContentLoaded", () => {
-        carregarCarrossel();
-        renderizarCards(manobras);
-
-        // Inicializa o carrossel do Bootstrap manualmente
-        const elementoCarrossel = document.getElementById('carouselDestaques');
-        if (elementoCarrossel) {
-            new bootstrap.Carousel(elementoCarrossel, {
-                ride: true,
-                interval: 4000
-            });
-        }
+        gerenciarNavegacaoAutenticada();
+        buscarManobras();
     });
 </script>
 </body>
