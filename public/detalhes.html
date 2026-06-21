@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skate Hub - Detalhes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+        }
+        .btn-favorito-detalhe {
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background .15s ease, color .15s ease, transform .15s ease;
+        }
+        .btn-favorito-detalhe:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .btn-favorito-detalhe.favoritado {
+            color: #ff4d6d;
+            background: rgba(255, 77, 109, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark px-3 py-3" style="background-color: #1a1a1a;">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand fs-4 fw-bold d-flex align-items-center gap-2" style="text-decoration: none; color: white;">
+                <img src="assets/img/logo-gato-grafismo.png"
+                     alt="Logo Skate Hub"
+                     width="100"
+                     height="100"
+                     class="d-inline-block align-text-top">
+                <span>SKATE HUB</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+                <div class="d-flex flex-column flex-md-row gap-2 ms-auto mt-3 mt-md-0">
+                    <a href="index.html" class="btn btn-light btn-sm fw-bold">HOME</a>
+                    <a href="pegboard.html" class="btn btn-light btn-sm fw-bold">PAGEBOARD</a>
+                    <a href="login.html" class="btn btn-light btn-sm fw-bold">LOGIN</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5 pt-3">
+        <div id="detalhe-manobra"></div>
+    </main>
+
+    <footer class="text-light text-center p-4 mt-5" style="background-color: #333;">
+        <p class="mb-0 fs-5">© 2026 Skate Hub - Criado por Iale Leles</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Recupera os dados do localStorage
+            const manobras = JSON.parse(localStorage.getItem('banco_manobras')) || [];
+            let favoritos = JSON.parse(localStorage.getItem('favoritos_manobras')) || [];
+
+            const params = new URLSearchParams(window.location.search);
+            const idManobra = parseInt(params.get('id'));
+
+            // 3. Encontra a manobra específica
+            const manobra = manobras.find(m => m.id === idManobra);
+            const container = document.getElementById('detalhe-manobra');
+
+            if (!manobra) {
+                container.innerHTML = `
+                    <div class="alert alert-danger text-center mt-5" role="alert">
+                        Manobra não encontrada ou link inválido! <br>
+                        <a href="index.html" class="btn btn-outline-danger btn-sm mt-3 fw-bold">Voltar para a Home</a>
+                    </div>`;
+                return;
+            }
+
+            function renderizarDetalhes() {
+                const ehFavorito = favoritos.includes(manobra.id);
+                
+                container.innerHTML = `
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-12 col-md-5">
+                            <img src="${manobra.imagem}" alt="${manobra.nome}" class="img-fluid rounded border border-secondary shadow w-100" style="max-height: 400px; object-fit: cover;">
+                        </div>
+                        <div class="col-12 col-md-7 text-light">
+                            <div class="d-flex align-items-center justify-content-between border-bottom border-secondary pb-3 mb-3">
+                                <div>
+                                    <h1 class="fw-bold mb-0">${manobra.nome}</h1>
+                                    <span class="badge bg-secondary mt-2 fs-6">${manobra.categoria}</span>
+                                </div>
+                                <button class="btn-favorito-detalhe ${ehFavorito ? 'favoritado' : ''}" id="btnFavDetalhe" title="Favoritar">
+                                    &hearts;
+                                </button>
+                            </div>
+                            
+                            <h4 class="text-warning fw-bold">Descrição</h4>
+                            <p class="fs-5 text-secondary mb-4">${manobra.descricaoCompleta || manobra.descricaoCurta}</p>
+                            
+                            <div class="row g-3 bg-dark p-3 rounded border border-secondary mb-4">
+                                <div class="col-6">
+                                    <span class="text-muted d-block small">BASE RECOMENDADA</span>
+                                    <span class="fw-bold text-light">${manobra.base || 'Nenhuma base específica'}</span>
+                                </div>
+                                <div class="col-6">
+                                    <span class="text-muted d-block small">DIFICULDADE</span>
+                                    <span class="fw-bold text-warning">${'★'.repeat(manobra.dificuldade_num || 1)}${'☆'.repeat(5 - (manobra.dificuldade_num || 1))}</span>
+                                </div>
+                            </div>
+
+                            ${manobra.dica_mestre ? `
+                            <div class="p-3 rounded style-dica" style="background-color: #2a2a2a; border-left: 5px solid #ffca28;">
+                                <h5 class="text-warning fw-bold mb-1">💡 Dica do Mestre:</h5>
+                                <p class="mb-0 text-secondary italic">${manobra.dica_mestre}</p>
+                            </div>
+                            ` : ''}
+
+                            <div class="mt-4">
+                                <a href="index.html" class="btn btn-outline-light fw-bold">← Voltar para Manobras</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('btnFavDetalhe').addEventListener('click', () => {
+                    if (favoritos.includes(manobra.id)) {
+                        favoritos = favoritos.filter(favId => favId !== manobra.id);
+                    } else {
+                        favoritos.push(manobra.id);
+                    }
+                    localStorage.setItem('favoritos_manobras', JSON.stringify(favoritos));
+                    renderizarDetalhes();
+                });
+            }
+
+            renderizarDetalhes();
+        });
+    </script>
+</body>
+</html>

@@ -1,76 +1,220 @@
-body { background-color: #1a1a1a; }
+body { 
+    background-color: #1a1a1a; 
+    margin: 0;
+    padding: 0;
+}
 
-        #pegboard-container {
-            position: relative;
-            background-color: #2b2b2b;
-            border: 1px solid #444;
-            border-radius: 8px;
-            height: 420px;
-            overflow: hidden;
-        }
+.navbar {
+    border-bottom: 2px solid black;
+}
+.background {
+    position: relative;
+    height: 75vh;
+    overflow: hidden;
+    border-bottom: 2px solid black;
+}
 
-        .pegboard-item {
-            position: absolute;
-            cursor: grab;
-            user-select: none;
-            object-fit: contain;
-        }
-        .pegboard-item:active { cursor: grabbing; }
+.background-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        #grade-preview {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 8px;
-            height: 420px;
-        }
+.carousel-item img {
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+}
 
-        .slot-preview {
-            background-color: #3a3a3a;
-            border: 1px solid #555;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
+.carousel-caption {
+    bottom: 20%; 
+    max-width: 600px;
+    margin: 0 auto;
+}
 
-        .slot-preview img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-        }
+.caixa-texto-slide {
+    padding: 20px;
+    border-radius: 8px;
+}
 
-        .slot-preview.vazio::after {
-            content: attr(data-label);
-            color: #666;
-            font-size: 12px;
-            font-family: sans-serif;
-        }
+.título-background h2 {
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    color: white;
+    font-size: clamp(36px, 4vw, 48px);
+    font-weight: bold;
+    text-align: left;
+}
 
-        #catalogo-wrapper {
-            background-color: #222;
-            border: 1px solid #444;
-            border-radius: 8px;
-            padding: 8px 12px;
-            height: 160px;
-            display: flex;
-            align-items: center;
-            overflow-x: auto;
-            overflow-y: hidden;
-            gap: 10px;
-        }
+.conteúdo-background h3 {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    color: white;
+    font-size: clamp(24px, 4vw, 24px);;
+    font-weight: bold;
+    text-align: left;
+}
 
-        #catalogo-wrapper img {
-            height: 130px;
-            width: auto;
-            flex-shrink: 0;
-            object-fit: contain;
-            cursor: pointer;
-            border-radius: 6px;
-            background: #3a3a3a;
-            padding: 6px;
-            border: 1px solid transparent;
-            transition: border-color 0.15s;
-        }
-        #catalogo-wrapper img:hover { border-color: #dc3545; }
+.texto-conteudo {
+    color: white;
+    font-size: clamp(30px, 4vw, 40px);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.card-img-top {
+    height: 200px;
+    background-color: #333;
+    position: relative;
+    border-radius: 5px 5px 0px 0px;
+
+}
+
+.tag {
+    display: inline-block;
+    background-color: red;
+    color: black;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.card {
+    background-color: #333;
+    color: white;
+    border-radius: 12px;
+    height: 100%;
+}
+
+.titulo-secao {
+    color: white;
+    font-size: clamp(36px, 4vw, 48px);  
+    padding: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.carousel-item img {
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.carousel-caption {
+    bottom: 20%; 
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.caixa-texto-slide {
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#pegboard-container {
+    position: relative;
+    background-color: #2b2b2b;
+    border: 1px solid #444;
+    border-radius: 8px;
+    height: 420px;
+    overflow: hidden;
+ }
+
+.pegboard-item {
+    position: absolute;
+    cursor: grab;
+    user-select: none;
+    object-fit: contain;
+}
+
+.pegboard-item:active { 
+    cursor: grabbing; 
+}
+
+#grade-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 8px;
+    height: 420px;
+}
+
+.slot-preview {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.slot-preview img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+
+.slot-preview.vazio::after {
+    content: attr(data-label);
+    color: #666;
+    font-size: 12px;
+    font-family: sans-serif;
+}
+
+#catalogo-wrapper {
+    background-color: #222;
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 8px 12px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 10px;
+}
+
+#catalogo-wrapper img {
+    height: 130px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+    cursor: pointer;
+    border-radius: 6px;
+    background: #3a3a3a;
+    padding: 6px;
+    border: 1px solid transparent;
+    transition: border-color 0.15s;
+}
+ 
+#catalogo-wrapper img:hover { 
+    border-color: #dc3545; 
+}
+
+.card-manobra {
+    background-color: #2a2a2a !important;
+    border: none !important;
+    transition: transform 0.2s;
+}
+
+.card-manobra:hover {
+    transform: translateY(-5px);
+}
+
+.btn-favorito {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: #ff4757;
+    backdrop-filter: blur(5px);
+    transition: all 0.2s ease;
+}
+
+.btn-favorito:hover {
+    transform: scale(1.1);
+    background: rgba(0, 0, 0, 0.8);
+
+}

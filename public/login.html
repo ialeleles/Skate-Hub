@@ -1,76 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Skate Hub</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Skate Hub - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        body {
+            background-color: #1a1a1a;
+        }
+        .card-login {
+            background-color: #2a2a2a;
+            border: 1px solid #3d3d3d;
+            border-radius: 10px;
+        }
+    </style>
 </head>
+<body>
 
-<body style="background-color: #1a1a1a">
+    <nav class="navbar navbar-expand-md navbar-dark px-3 py-3" style="background-color: #1a1a1a;">
+        <div class="container-fluid">
+            <a href="index.html" class="navbar-brand fs-4 fw-bold d-flex align-items-center gap-2" style="text-decoration: none; color: white;">
+                <img src="assets/img/logo-gato-grafismo.png"
+                     alt="Logo Skate Hub"
+                     width="100"
+                     height="100"
+                     class="d-inline-block align-text-top">
+                <span>SKATE HUB</span>
+            </a>
 
-<nav class="navbar navbar-dark px-2" style="background-color: #1a1a1a;">
-    <div class="container-fluid d-flex justify-content-center align-items-center">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <a href="index.html" class="navbar-brand fs-3 fs-md-1 fw-bold p-2 d-flex align-items-center" style="text-decoration: none; color: white;">
-            <img src="assets/img/logo-gato-grafismo.png" 
-                 alt="Logo Skate Hub" 
-                 width="120" 
-                 height="120"
-                 class="me-2"> <span>SKATE HUB</span>
-        </a>
-        
-    </div>
-</nav>
-
-<form id="formLogin" class="container mt-5 text-light" style="max-width: 400px;">
-    <h3 class="mb-3">Login</h3>
-    <div class="mb-3">
-        <label class="form-label">Usuário</label>
-        <input type="text" id="loginUsuario" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Senha</label>
-        <input type="password" id="senhaUsuario" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-danger w-100 mt-2 fw-bold">Entrar</button>
-    <a href="#" id="btnIrParaCadastro" class="btn btn-outline-light w-100 mt-2">Não tem conta? Junte-se a nós</a>
-</form>
-
-<form id="formCadastro" class="container mt-5 text-light d-none" style="max-width: 400px; margin-bottom: 100px;">
-    <h3 class="mb-3">Criar Nova Conta</h3>
-    <div class="mb-3">
-        <label class="form-label">Nome Completo</label>
-        <input type="text" id="cadNome" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">E-mail</label>
-        <input type="email" id="cadEmail" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Escolha um Usuário</label>
-        <input type="text" id="cadLogin" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Escolha uma Senha</label>
-        <input type="password" id="cadSenha" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-warning w-100 mt-2 fw-bold">Cadastrar</button>
-    <a href="#" id="btnIrParaLogin" class="btn btn-outline-light w-100 mt-2">Já tem conta? Faça o Login</a>
-</form>
-
-<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100;">
-    <div id="toastMensagem" class="toast align-items-center text-white border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div id="toastCorpo" class="toast-body fw-bold">
+            <div class="collapse navbar-collapse" id="menu">
+                <div class="d-flex flex-column flex-md-row gap-2 ms-auto mt-3 mt-md-0">
+                    <a href="index.html" class="btn btn-light btn-sm fw-bold">HOME</a>
+                    <a href="pegboard.html" class="btn btn-light btn-sm fw-bold">PAGEBOARD</a>
+                    <a href="login.html" class="btn btn-light btn-sm fw-bold active">LOGIN</a>
                 </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
         </div>
-    </div>
-</div>
+    </nav>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="assets/scripts/login.js"></script>
+    <main class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-5">
+                <div class="card-login p-4 text-light shadow-lg">
+                    <h3 class="text-center fw-bold mb-4 text-warning">ÁREA DO SKATISTA</h3>
+                    
+                    <div class="alert alert-danger d-none" id="erro-login" role="alert">
+                        Usuário ou senha incorretos!
+                    </div>
+
+                    <form id="formLogin">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail ou Usuário</label>
+                            <input type="text" class="form-control bg-dark text-light border-secondary" id="email" required placeholder="skate@hub.com">
+                        </div>
+                        <div class="mb-4">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control bg-dark text-light border-secondary" id="senha" required placeholder="******">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-light w-100 fw-bold py-2 mb-3">ENTRAR</button>
+                    </form>
+
+                    <div class="text-center">
+                        <small class="text-muted">Usuário de teste: <strong>admin</strong> | Senha: <strong>1234</strong></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-light text-center p-4 mt-5" style="background-color: #333;">
+        <p class="mb-0 fs-5">© 2026 Skate Hub - Criado por Iale Leles</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.getElementById("formLogin");
+            const erroAlerta = document.getElementById("erro-login");
+
+            form.addEventListener("submit", (e) => {
+                e.preventDefault(); // Impede a página de recarregar
+
+                const usuarioDigitado = document.getElementById("email").value;
+                const senhaDigitada = document.getElementById("senha").value;
+
+                // Credenciais de teste simuladas
+                const USUARIO_CORRETO = "admin";
+                const SENHA_CORRETA = "1234";
+
+                if (usuarioDigitado === USUARIO_CORRETO && senhaDigitada === SENHA_CORRETA) {
+                    // Oculta o erro se ele estiver visível
+                    erroAlerta.classList.add("d-none");
+
+                    // Salva que o usuário logou com sucesso
+                    localStorage.setItem("usuario_logado", "true");
+
+                    alert("Login realizado com sucesso! Bem-vindo de volta.");
+                    
+                    // Redireciona para a Home (index.html) através do Live Server
+                    window.location.href = "index.html";
+                } else {
+                    // Mostra o alerta de erro do Bootstrap
+                    erroAlerta.classList.remove("d-none");
+                }
+            });
+        });
+    </script>
 </body>
 </html>
