@@ -16,7 +16,4 @@ Autenticação Simulada (Login): Uma área restrita para o skatista que valida c
 
 Dashboard de Estatísticas: Uma tela de métricas que consome os dados do localStorage em tempo real usando a biblioteca Chart.js. Ela exibe a distribuição de manobras cadastradas por meio de um gráfico de barras (separado por categorias) e um gráfico de rosca (separado por estrelas de dificuldade), oferecendo ao usuário um panorama visual do progresso do seu catálogo.
 
-## Informações Gerais
-- Nome: Iale Leles de Almeida
-- Matricula: 927707
 
